@@ -1,35 +1,19 @@
 const express = require('express')
+const router = require('../v1/api/Users')
 const bodyParser = require('body-parser')
 
-const {connect} = require('./config')
+const {connect} = require('../config/mongoose')
 
 connect()
 
 let server = express()
-let router = express.Router()
 
 server.use(bodyParser.json())
 
 let port = 4000
 let name = 'Ifeanyi'
 
-function welcome(req, res){
-    res.status(200).json('Welcome '+name+', this is nodejs class')
 
-}
-
-
-function login(req, res){
-    
-    let username = req.body.username
-    let email = req.body.email
-    console.log({username})
-
-    res.status(200).json({username, email})
-}
-
-router.get('/welcome', welcome)
-router.post('/login', login)
 
 server.use('/api/v1', router)
 
