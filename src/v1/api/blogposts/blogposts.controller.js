@@ -40,38 +40,39 @@ const commentAPostByUser = async (req, res) => {
 }
 
 
-const getSingleUser = async(req, res) =>{
+//get single post
+const getSinglePost = async(req, res) =>{
     try{
-        const {userId} = req.params
-        console.log(userId)
-        const foundUser = await BlogpostModel.findOne({_id: userId}).select('-password')
-        res.status(200).json({singleUser: foundUser})
+        const {postId} = req.params
+        console.log(postId)
+        const foundPost = await BlogpostModel.findOne({_id: postId})
+        res.status(200).json({singlePost: foundPost})
     }catch(e){
 
     }
     
 }
 
-//update user
-const updateUser = async(req, res) =>{
+//update post
+const updatePost = async(req, res) =>{
     try{
-        const {userId} = req.params
+        const {postId} = req.params
         const inputdata = req.body
-        let filter = {_id:userId}
+        let filter = {_id:postId}
         let selector = {$set: inputdata }
-        const updateUser = await BlogpostModel.updateOne(filter, selector)
-        res.status(200).json({data: updateUser})
+        const updatePost = await BlogpostModel.updateOne(filter, selector)
+        res.status(200).json({data: updatePost})
 
     }catch(e){}
     
 }
 
 //delete user
-const deleteUser = async (req, res) => {
+const deletePost = async (req, res) => {
     try {
-    let {userId} = req.params
-    const deletedUser = await BlogpostModel.deleteOne({_id: userId})
-    res.status(200).json({message: 'User deleted successfully', data: deletedUser})
+    let {postId} = req.params
+    const deletedPost = await BlogpostModel.deleteOne({_id: postId})
+    res.status(200).json({message: 'Post deleted successfully', data: deletedPost})
     } catch (e) {
     
     }
@@ -82,7 +83,7 @@ module.exports = {
     postBlog,
     getAllPost,
     commentAPostByUser, 
-    getSingleUser,
-    updateUser, 
-    deleteUser
+    getSinglePost,
+    updatePost, 
+    deletePost
 }

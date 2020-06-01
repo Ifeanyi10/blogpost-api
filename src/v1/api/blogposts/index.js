@@ -6,9 +6,10 @@ const router = express.Router()
 
 router.post('/postBlog', BlogPostsController.postBlog)
 router.get('/getAllPost', BlogPostsController.getAllPost)
-//router.get('/getSingleUser/:userId', UserController.getSingleUser)
+router.get('/getSinglePost/:postId', BlogPostsController.getSinglePost)
+router.put('/updatePost/:postId', BlogPostsController.updatePost)
 //router.put('/blogpost/:userId', UserController.updateUser)
-//router.delete('/deleteUser/:userId', UserController.deleteUser)
+router.delete('/deletePost/:postId', BlogPostsController.deletePost)
 
 
 module.exports = router
